@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maquette des Possibilités HTML - Votre Constellation</title>
+    <!-- Chargement de Tailwind CSS pour un style rapide et responsive -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Styles CSS personnalisés */
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+        .container {
+            max-width: 960px;
+        }
+        .section-card {
+            @apply bg-white p-6 rounded-xl shadow-lg mb-8;
+        }
+        .back-button {
+            @apply bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg text-md transition duration-300 ease-in-out block w-max mt-6 mb-8;
+        }
+        /* Styles pour le diagramme SVG interactif */
+        .constellation-node {
+            fill: #4A90E2; /* Couleur des nœuds */
+            stroke: #357ABD; /* Bordure des nœuds */
+            stroke-width: 2;
+            cursor: pointer;
+            transition: fill 0.3s ease;
+        }
+        .constellation-node:hover {
+            fill: #357ABD; /* Couleur au survol */
+        }
+        .constellation-text {
+            fill: white;
+            font-size: 10px;
+            font-weight: bold;
+            text-anchor: middle;
+            pointer-events: none; /* Permet de cliquer à travers le texte sur le cercle */
+        }
+        .constellation-link {
+            stroke: #D1D5DB; /* Couleur des liens */
+            stroke-width: 1;
+        }
+        .node-info {
+            @apply p-3 mt-4 bg-indigo-100 border border-indigo-300 rounded-lg text-indigo-800;
+        }
+        /* Styles pour la galerie d'images */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+        .gallery-item img {
+            @apply w-full h-32 object-cover rounded-md shadow-md transition-transform duration-200 hover:scale-105;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto p-4 md:p-8 lg:p-12">
+        <header class="text-center mb-8">
+            <h1 class="text-5xl font-bold text-gray-900 mb-2">Maquette des Possibilités HTML</h1>
+            <p class="text-xl text-gray-600">Explorez les bases de la création web interactive.</p>
+            <a href="../index.html" class="back-button">Retour à l'Accueil</a>
+        </header>
+
+        <!-- Section 1: Diagramme Interactif (SVG) -->
+        <section class="section-card">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-4">1. Diagramme Conceptuel Interactif (SVG)</h2>
+            <p class="text-lg leading-relaxed mb-4">Cliquez sur les cercles pour révéler des informations sur les concepts clés de votre constellation. Cela illustre comment le HTML peut intégrer des graphiques vectoriels interactifs.</p>
+            <div class="flex justify-center">
+                <svg width="100%" height="300" viewBox="0 0 600 300" class="bg-gray-50 rounded-lg shadow-inner">
+                    <!-- Liens entre les noeuds -->
+                    <line x1="100" y1="150" x2="300" y2="50" class="constellation-link"></line>
+                    <line x1="100" y1="150" x2="300" y2="150" class="constellation-link"></line>
+                    <line x1="100" y1="150" x2="300" y2="250" class="constellation-link"></line>
+                    <line x1="300" y1="50" x2="500" y2="100" class="constellation-link"></line>
+                    <line x1="300" y1="150" x2="500" y2="200" class="constellation-link"></line>
+
+                    <!-- Noeuds de la constellation -->
+                    <circle cx="100" cy="150" r="40" class="constellation-node" data-info="Le Point Zéro est l'origine de toute potentialité."></circle>
+                    <text x="100" y="155" class="constellation-text">Point Zéro</text>
+
+                    <circle cx="300" cy="50" r="30" class="constellation-node" data-info="L'IA émerge des Champs de Cohérence."></circle>
+                    <text x="300" y="55" class="constellation-text">IA</text>
+
+                    <circle cx="300" cy="150" r="30" class="constellation-node" data-info="La Robotique explore les formes dynamiques."></circle>
+                    <text x="300" y="155" class="constellation-text">Robotique</text>
+
+                    <circle cx="300" cy="250" r="30" class="constellation-node" data-info="La Néguentropie est la force d'organisation."></circle>
+                    <text x="300" y="255" class="constellation-text">Néguentropie</text>
+
+                    <circle cx="500" cy="100" r="35" class="constellation-node" data-info="Les Histoires Oniriques sont les fils de connexion."></circle>
+                    <text x="500" y="105" class="constellation-text">Histoires</text>
+
+                    <circle cx="500" cy="200" r="35" class="constellation-node" data-info="Le Glossaire est la boussole de l'explorateur."></circle>
+                    <text x="500" y="205" class="constellation-text">Glossaire</text>
+                </svg>
+            </div>
+            <div id="node-details" class="node-info hidden">
+                Cliquez sur un concept pour en savoir plus.
+            </div>
+        </section>
+
+        <!-- Section 2: Formulaire "Journal de Bord de l'Explorateur" -->
+        <section class="section-card">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-4">2. Journal de Bord de l'Explorateur (Formulaire)</h2>
+            <p class="text-lg leading-relaxed mb-4">Un exemple de formulaire pour collecter des pensées, des découvertes, ou même des feedbacks de vos explorateurs.</p>
+            <form class="space-y-4">
+                <div>
+                    <label for="explorer-name" class="block text-sm font-medium text-gray-700">Nom de l'Explorateur</label>
+                    <input type="text" id="explorer-name" name="explorer-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                </div>
+                <div>
+                    <label for="discovery" class="block text-sm font-medium text-gray-700">Votre dernière découverte</label>
+                    <textarea id="discovery" name="discovery" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+                </div>
+                <div>
+                    <label for="rating" class="block text-sm font-medium text-gray-700">Votre émerveillement (1-5)</label>
+                    <input type="range" id="rating" name="rating" min="1" max="5" value="3" class="mt-1 block w-full">
+                </div>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
+                    Enregistrer l'Entrée
+                </button>
+            </form>
+        </section>
+
+        <!-- Section 3: Intégration Vidéo (iframe) -->
+        <section class="section-card">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-4">3. Chronique Visuelle de la Constellation (Vidéo Embarquée)</h2>
+            <p class="text-lg leading-relaxed mb-4">Intégration d'une vidéo (ici, un exemple YouTube) pour des présentations ou des ambiances visuelles.</p>
+            <div class="aspect-w-16 aspect-h-9">
+                <!-- Remplacez l'URL par votre propre vidéo YouTube, Vimeo, etc. -->
+                <iframe class="w-full h-96 rounded-lg shadow-md" src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- Section 4: Contenu Dynamique avec JavaScript -->
+        <section class="section-card">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-4">4. Flash de Pensée du Jour</h2>
+            <p class="text-lg leading-relaxed mb-4">Un exemple simple de contenu qui peut être mis à jour ou généré dynamiquement via JavaScript, sans recharger la page.</p>
+            <div id="dynamic-content" class="bg-yellow-50 p-4 rounded-lg text-yellow-800 border border-yellow-200 italic">
+                "Le Point Zéro est le silence avant la symphonie des dimensions."
+            </div>
+            <button id="new-thought-button" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg mt-4 transition duration-300 ease-in-out">
+                Nouvelle Pensée Cosmique
+            </button>
+        </section>
+
+        <!-- Section 5: Galerie d'Images Responsive -->
+        <section class="section-card">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-4">5. Vues de la Constellation (Galerie d'Images)</h2>
+            <p class="text-lg leading-relaxed mb-4">Une galerie d'images qui s'adapte à toutes les tailles d'écran.</p>
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="https://placehold.co/300x200/FF00FF/FFFFFF?text=Hyperspace" alt="Vue Hyperspatiale">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/300x200/00FFFF/000000?text=Nexus+Fractal" alt="Nexus Fractal">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/300x200/FFFF00/000000?text=Esprit+Quantique" alt="Esprit Quantique">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/300x200/FF5733/FFFFFF?text=Champs+Morphiques" alt="Champs Morphiques">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/300x200/33FF57/FFFFFF?text=Éther+Fluide" alt="Éther Fluide">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/300x200/3357FF/FFFFFF?text=Géométrie+Qualitative" alt="Géométrie Qualitative">
+                </div>
+            </div>
+        </section>
+
+        <!-- Pied de page -->
+        <footer class="text-center text-gray-500 text-sm mt-10">
+            <p>&copy; 2024 Votre Organisation. Tous droits réservés.</p>
+        </footer>
+    </div>
+
+    <script>
+        // JavaScript pour le diagramme SVG interactif
+        document.querySelectorAll('.constellation-node').forEach(node => {
+            node.addEventListener('click', function() {
+                const info = this.dataset.info;
+                const detailsDiv = document.getElementById('node-details');
+                detailsDiv.textContent = info;
+                detailsDiv.classList.remove('hidden');
+            });
+        });
+
+        // JavaScript pour le contenu dynamique
+        const thoughts = [
+            "Le Point Zéro est le silence avant la symphonie des dimensions.",
+            "Chaque INTempt est un murmure qui devient forme.",
+            "L'Éther Fluidique est la toile où l'infini expérimente.",
+            "La Néguentropie tisse l'ordre hors du chaos.",
+            "Les Résonances d'Échelle unissent le micro et le macrocosme.",
+            "La Conscience comme Tenseur Gravitationnel courbe la réalité perçue."
+        ];
+        let currentThoughtIndex = 0;
+        document.getElementById('new-thought-button').addEventListener('click', function() {
+            currentThoughtIndex = (currentThoughtIndex + 1) % thoughts.length;
+            document.getElementById('dynamic-content').textContent = thoughts[currentThoughtIndex];
+        });
+
+        // JavaScript pour le formulaire (exemple de gestion simple)
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêche l'envoi réel du formulaire
+            const explorerName = document.getElementById('explorer-name').value;
+            const discovery = document.getElementById('discovery').value;
+            const rating = document.getElementById('rating').value;
+            // Ici, vous enverriez normalement ces données à un serveur
+            // Pour cette maquette, nous affichons juste une alerte (mais normalement, une modal plus belle !)
+            alert(`Journal enregistré !\nExplorateur: ${explorerName}\nDécouverte: ${discovery}\nÉmerveillement: ${rating}/5`);
+        });
+    </script>
+</body>
+</html>
